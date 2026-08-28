@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nico Valerius</title>
+<meta name="description" content="Nico Valerius">
+<meta name="theme-color" content="#F5F5F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="alternate" hreflang="de" href="https://nicovalerius.com/">
+<link rel="alternate" hreflang="en" href="https://nicovalerius.com/en.html">
+
+<!--
+  ══════════════════════════════════════════════════════════
+  ENGLISCHE VERSION
+
+  Gleicher Aufbau wie index.html, nur der Text ist englisch.
+  Wenn du unten etwas änderst, änder es auch in index.html –
+  sonst laufen die beiden Seiten auseinander.
+  ══════════════════════════════════════════════════════════
+-->
+
+<style>
+  :root {
+    --bg:        #F5F5F7;
+    --surface:   #FFFFFF;
+    --text:      #1D1D1F;
+    --secondary: #6E6E73;
+    --separator: rgba(0, 0, 0, 0.09);
+    --chevron:   #C4C4C8;
+    --press:     rgba(0, 0, 0, 0.035);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:        #000000;
+      --surface:   #1C1C1E;
+      --text:      #F5F5F7;
+      --secondary: #98989D;
+      --separator: rgba(255, 255, 255, 0.11);
+      --chevron:   #48484A;
+      --press:     rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    margin: 0;
+    padding: 40px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  main {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  h1 {
+    margin: 0;
+    text-align: center;
+    font-size: clamp(2rem, 8.5vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+  }
+
+  .sub {
+    margin: 12px 0 40px;
+    text-align: center;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: var(--secondary);
+  }
+
+  /* ── Liste ──────────────────────────────────────────── */
+
+  .list {
+    background: var(--surface);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 54px;
+    padding: 0 18px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.0625rem;
+    letter-spacing: -0.01em;
+    background: transparent;
+    transition: background 130ms ease;
+  }
+
+  .item + .item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    right: 0;
+    height: 1px;
+    background: var(--separator);
+  }
+
+  .item span { flex: 1; }
+
+  .item svg {
+    flex: none;
+    width: 8px;
+    height: 13px;
+    color: var(--chevron);
+    transition: transform 130ms ease;
+  }
+
+  .item:hover,
+  .item:focus-visible { background: var(--press); }
+
+  .item:hover svg { transform: translateX(2px); }
+
+  .item:active { background: var(--press); opacity: 0.7; }
+
+  .item:focus-visible {
+    outline: 2px solid #0071E3;
+    outline-offset: -2px;
+  }
+
+  footer {
+    margin-top: 34px;
+    text-align: center;
+    font-size: 0.8125rem;
+    letter-spacing: -0.005em;
+    color: var(--secondary);
+  }
+
+  footer p { margin: 0; }
+
+  footer .legal { margin-top: 7px; }
+
+  footer a {
+    color: var(--secondary);
+    text-decoration: none;
+  }
+
+  footer a:hover { text-decoration: underline; }
+
+  footer a:focus-visible {
+    outline: 2px solid #0071E3;
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  /* ── Einblenden ─────────────────────────────────────── */
+
+  main {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: in 620ms cubic-bezier(0.32, 0.72, 0, 1) 40ms forwards;
+  }
+
+  @keyframes in {
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    main { animation: none; opacity: 1; transform: none; }
+    .item, .item svg { transition: none; }
+  }
+</style>
+</head>
+
+<body>
+  <main>
+
+    <h1>Nico Valerius</h1>
+
+    <p class="sub">Here's how to reach me.</p>
+
+    <nav class="list">
+
+      <a class="item" href="mailto:kontakt@nicovalerius.com">
+        <span>Email</span>
+        <svg viewBox="0 0 8 13" fill="none" aria-hidden="true">
+          <path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+      <a class="item" href="https://www.tiktok.com/@nicoknalle" target="_blank" rel="noopener">
+        <span>TikTok</span>
+        <svg viewBox="0 0 8 13" fill="none" aria-hidden="true">
+          <path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+      <a class="item" href="https://www.instagram.com/nicovallle" target="_blank" rel="noopener">
+        <span>Instagram</span>
+        <svg viewBox="0 0 8 13" fill="none" aria-hidden="true">
+          <path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+    </nav>
+
+    <footer>
+      <p>© 2026 Nico Valerius</p>
+      <p class="legal">
+        <a href="index.html" lang="de" hreflang="de">Deutsch</a>
+      </p>
+      <p class="legal">
+        <a href="impressum.html">Imprint</a> &middot;
+        <a href="datenschutz.html">Privacy</a>
+      </p>
+    </footer>
+
+  </main>
+</body>
+</html>
