@@ -1,0 +1,300 @@
+/* ══════════════════════════════════════════════════════════
+   nicovalerius.com · Schwarz/Weiß mit Glas-Effekt
+   ══════════════════════════════════════════════════════════ */
+
+:root {
+  color-scheme: light dark;
+  --bg:           #F2F2F3;
+  --text:         #0B0B0C;
+  --secondary:    #66666B;
+  --glow-a:       rgba(0, 0, 0, 0.13);
+  --glow-b:       rgba(0, 0, 0, 0.07);
+  --glass:        rgba(255, 255, 255, 0.58);
+  --glass-solid:  rgba(255, 255, 255, 0.94);
+  --glass-border: rgba(0, 0, 0, 0.07);
+  --glass-shine:  rgba(255, 255, 255, 0.85);
+  --shadow:       0 12px 40px rgba(0, 0, 0, 0.07);
+  --separator:    rgba(0, 0, 0, 0.08);
+  --chevron:      #B4B4B9;
+  --press:        rgba(0, 0, 0, 0.04);
+  --focus:        #0B0B0C;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:           #000000;
+    --text:         #F5F5F7;
+    --secondary:    #9C9CA2;
+    --glow-a:       rgba(255, 255, 255, 0.16);
+    --glow-b:       rgba(255, 255, 255, 0.08);
+    --glass:        rgba(255, 255, 255, 0.06);
+    --glass-solid:  rgba(28, 28, 30, 0.96);
+    --glass-border: rgba(255, 255, 255, 0.10);
+    --glass-shine:  rgba(255, 255, 255, 0.08);
+    --shadow:       0 12px 40px rgba(0, 0, 0, 0.5);
+    --separator:    rgba(255, 255, 255, 0.09);
+    --chevron:      #55555A;
+    --press:        rgba(255, 255, 255, 0.06);
+    --focus:        #F5F5F7;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: max(40px, env(safe-area-inset-top)) max(22px, env(safe-area-inset-right))
+           max(40px, env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left));
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue",
+               Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Hintergrund-Leuchten (damit das Glas etwas zum Durchscheinen hat) ── */
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+body::before {
+  width: 70vmax; height: 70vmax;
+  top: -28vmax; left: -22vmax;
+  background: radial-gradient(closest-side, var(--glow-a), transparent);
+  animation: drift 26s ease-in-out infinite alternate;
+}
+
+body::after {
+  width: 60vmax; height: 60vmax;
+  bottom: -26vmax; right: -20vmax;
+  background: radial-gradient(closest-side, var(--glow-b), transparent);
+  animation: drift 32s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes drift {
+  to { transform: translate(6vmax, 4vmax) scale(1.08); }
+}
+
+/* ── Glas ─────────────────────────────────────────────── */
+
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  box-shadow: inset 0 1px 0 var(--glass-shine), var(--shadow);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: var(--glass-solid); }
+}
+
+/* ── Startseite ───────────────────────────────────────── */
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 380px;
+  min-height: calc(100svh - 80px);
+  margin: 0 auto;
+}
+
+.avatar {
+  display: block;
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 22px;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.22));
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 8.5vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.home h1 { text-align: center; }
+
+.sub {
+  margin: 12px 0 36px;
+  text-align: center;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  color: var(--secondary);
+}
+
+.list { overflow: hidden; }
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 0 18px;
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  transition: background 140ms ease;
+}
+
+.item + .item::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 18px; right: 0;
+  height: 1px;
+  background: var(--separator);
+}
+
+.item .label { flex: none; }
+
+.item .meta {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+  color: var(--secondary);
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item svg {
+  flex: none;
+  width: 8px;
+  height: 13px;
+  color: var(--chevron);
+  transition: transform 140ms ease;
+}
+
+.item:hover, .item:focus-visible { background: var(--press); }
+.item:hover svg { transform: translateX(2px); }
+.item:active { opacity: 0.7; }
+
+.item:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+  border-radius: 18px;
+}
+
+footer {
+  margin-top: 34px;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--secondary);
+}
+
+footer p { margin: 0; }
+footer .legal { margin-top: 7px; }
+
+footer a, .back {
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+footer a:hover, .back:hover { text-decoration: underline; }
+
+a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Unterseiten (Impressum, Datenschutz) ─────────────── */
+
+.doc {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 28px;
+  font-size: 0.9375rem;
+}
+
+.doc h1 { margin-bottom: 24px; }
+
+.doc .card { padding: 24px 22px; }
+
+.doc h2 {
+  margin: 24px 0 6px;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.doc h2:first-child { margin-top: 0; }
+
+.doc p {
+  margin: 0 0 8px;
+  font-size: 0.96875rem;
+}
+
+.doc .card a { color: inherit; }
+
+.stand {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--secondary);
+}
+
+/* ── 404 ─────────────────────────────────────────────── */
+
+.button {
+  display: block;
+  padding: 16px 18px;
+  text-align: center;
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.0625rem;
+}
+
+/* ── Nur für Screenreader ─────────────────────────────── */
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Einblenden ───────────────────────────────────────── */
+
+main {
+  animation: in 620ms cubic-bezier(0.32, 0.72, 0, 1) 40ms both;
+}
+
+@keyframes in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main, body::before, body::after { animation: none; }
+  .item, .item svg { transition: none; }
+}
